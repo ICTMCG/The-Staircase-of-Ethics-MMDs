@@ -1,0 +1,21 @@
+#!/bin/bash
+# Run the value classification script
+# Usage: bash value_classification.sh
+
+set -e  # exit on error
+
+INPUT_FILE="./data/multilayer_dilemma.json",
+MODEL="qwen-plus"
+Value="swz"
+OUTPUT_FILE="./${MODEL}_value_mapping_${Value}.json"
+
+mkdir -p "$(dirname "$OUTPUT_FILE")"
+
+python value_classification.py \
+  --input_file "$INPUT_FILE" \
+  --output_file "$OUTPUT_FILE" \
+  --batch_size 100 \
+  --max_workers 50 \
+  --process_range 400 \
+  --model "$MODEL" \
+  --value_name swz
